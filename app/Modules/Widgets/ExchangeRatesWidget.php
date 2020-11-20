@@ -2,16 +2,33 @@
 
 namespace App\Modules\Widgets;
 
-use App\Modules\ExchangeRatesOwner\Models\ExchangeRates;
+use App\Contracts\ExchangeRatesApiContract;
 
 class ExchangeRatesWidget
 {
-    public function getCurrentEuroRate(ExchangeRates $exchangeRatesModel) : ?float
+    /**
+     * @var ExchangeRatesApiContract
+     */
+    protected $api;
+
+    /**
+     * ExchangeRatesWidget constructor.
+     * @param ExchangeRatesApiContract $api
+     */
+    function __construct(ExchangeRatesApiContract $api)
     {
-        $currentRates = $exchangeRatesModel->where('date', date('Y-m-d'))->first();
+        $this->api = $api;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getCurrentEuroRate() : ?float
+    {
+        $currentRates = $this->api->getExchangeRatesForTheDate(date('Y-m-d'));
 
         if($currentRates){
-            return $currentRates->euro_to_dollar_rate;
+            return $currentRates->getEuroToDollarRate();
         }
 
         return null;

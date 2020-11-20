@@ -2,7 +2,8 @@
 
 namespace App\Modules\ExchangeRatesOwner\Jobs;
 
-use App\Modules\ExchangeRatesOwner\Models\ExchangeRates;
+use App\Contracts\ExchangeRatesApiContract;
+use App\Contracts\ExchangeRatesEntityContract;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -12,41 +13,27 @@ use Illuminate\Queue\SerializesModels;
 class SyncExchangeRates implements ShouldQueue
 {
     /**
-     * @var ExchangeRates
+     * @var ExchangeRatesApiContract
      */
-    protected $model;
+    protected $api;
 
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * SyncExchangeRates constructor.
-     * @param ExchangeRates $model
+     * @param ExchangeRatesApiContract $api
      */
-    public function __construct(ExchangeRates $model)
+    public function handle(ExchangeRatesApiContract $api)
     {
-        $this->model = $model;
-    }
-
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        //
+        $api->createNewRecord(1.1, 1.2, date('Y-m-d'));
     }
 
     /**
      * @param float $euroToDollarRate
      * @param float $poundToDollarRate
-     * @return ExchangeRates
+     * @return ExchangeRatesEntityContract
      */
-    protected function createNewRecord(float $euroToDollarRate, float $poundToDollarRate) : ExchangeRates
+    protected function createNewRecord(float $euroToDollarRate, float $poundToDollarRate) : ExchangeRatesEntityContract
     {
-        return $this->model->create([
-            'euro_to_dollar_rate' => $euroToDollarRate,
-            'pound_to_dollar_rate' => $poundToDollarRate
-        ]);
+        return $this->api->createNewRecord($euroToDollarRate, $poundToDollarRate, date('Y-m-d'));
     }
 }
