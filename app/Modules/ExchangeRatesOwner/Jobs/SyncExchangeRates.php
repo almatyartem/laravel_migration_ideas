@@ -2,7 +2,7 @@
 
 namespace App\Modules\ExchangeRatesOwner\Jobs;
 
-use App\Modules\ExchangeRatesOwner\Models\ExchangeRates;
+use App\Modules\ExchangeRatesOwner\Models\ExchangeRatesEntity;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 class SyncExchangeRates implements ShouldQueue
 {
     /**
-     * @var ExchangeRates
+     * @var ExchangeRatesEntity
      */
     protected $model;
 
@@ -20,9 +20,9 @@ class SyncExchangeRates implements ShouldQueue
 
     /**
      * SyncExchangeRates constructor.
-     * @param ExchangeRates $model
+     * @param ExchangeRatesEntity $model
      */
-    public function __construct(ExchangeRates $model)
+    public function __construct(ExchangeRatesEntity $model)
     {
         $this->model = $model;
     }
@@ -40,13 +40,14 @@ class SyncExchangeRates implements ShouldQueue
     /**
      * @param float $euroToDollarRate
      * @param float $poundToDollarRate
-     * @return ExchangeRates
+     * @return ExchangeRatesEntity
      */
-    protected function createNewRecord(float $euroToDollarRate, float $poundToDollarRate) : ExchangeRates
+    protected function createNewRecord(float $euroToDollarRate, float $poundToDollarRate) : ExchangeRatesEntity
     {
         return $this->model->create([
             'euro_to_dollar_rate' => $euroToDollarRate,
-            'pound_to_dollar_rate' => $poundToDollarRate
+            'pound_to_dollar_rate' => $poundToDollarRate,
+            'date' => date('Y-m-d')
         ]);
     }
 }

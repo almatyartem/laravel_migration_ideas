@@ -2,11 +2,11 @@
 
 namespace App\Modules\Widgets;
 
-use App\Modules\ExchangeRatesOwner\Models\ExchangeRates;
+use App\Modules\ExchangeRatesOwner\Models\ExchangeRatesEntity;
 
 class ExchangeRatesWidget
 {
-    public function getCurrentEuroRate(ExchangeRates $exchangeRatesModel) : ?float
+    public function getCurrentEuroRate(ExchangeRatesEntity $exchangeRatesModel) : ?float
     {
         $currentRates = $exchangeRatesModel->where('date', date('Y-m-d'))->first();
 
