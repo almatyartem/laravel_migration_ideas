@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Storage\Eloquent\Store;
+namespace App\Storage\Store\Products;
 
-use App\Common\Contracts\Storage\ModelConvertableToDTO;
-use App\Common\DTO\Models\Store\ProductDTO;
-use App\Storage\Eloquent\MultiCurrencies\Currencies;
-use App\Storage\Eloquent\BaseModel;
+use App\Contracts\Storage\ModelContract;
+use App\Storage\MultiCurrencies\Currencies\CurrenciesModel;
+use App\Storage\Store\Prices\PricesModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Products extends BaseModel implements ModelConvertableToDTO
+class ProductsModel extends Model implements ModelContract
 {
     /**
      * @var string
@@ -43,7 +43,7 @@ class Products extends BaseModel implements ModelConvertableToDTO
      */
     public function getDTOClassName(): string
     {
-        return ProductDTO::class;
+        return ProductsDTO::class;
     }
 
     /**
@@ -51,7 +51,7 @@ class Products extends BaseModel implements ModelConvertableToDTO
      */
     public function supplier_currency()
     {
-        return $this->belongsTo(Currencies::class, 'supplier_currency_id');
+        return $this->belongsTo(CurrenciesModel::class, 'supplier_currency_id');
     }
 
     /**
@@ -59,6 +59,6 @@ class Products extends BaseModel implements ModelConvertableToDTO
      */
     public function prices()
     {
-        return $this->hasMany(Prices::class, 'currency_id');
+        return $this->hasMany(PricesModel::class, 'currency_id');
     }
 }

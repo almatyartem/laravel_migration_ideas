@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Common\DTO\Models\MultiCurrencies;
+namespace App\Storage\MultiCurrencies\Currencies;
 
+use App\Contracts\Storage\DTOContract;
 use Spatie\DataTransferObject\DataTransferObject;
 
-class CurrencyDTO extends DataTransferObject
+class CurrenciesDTO extends DataTransferObject implements DTOContract
 {
     public int $id;
     public string $code;

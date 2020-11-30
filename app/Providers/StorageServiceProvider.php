@@ -14,7 +14,7 @@ use App\Storage\MultiCurrencies\Currencies\CurrenciesRepository;
 use App\Storage\MultiCurrencies\Currencies\CurrenciesSearchBuilder;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class StorageServiceProvider extends ServiceProvider
 {
     /**
      * All of the container bindings that should be registered.
@@ -22,38 +22,8 @@ class AppServiceProvider extends ServiceProvider
      * @var array
      */
     public $bindings = [
-        ExchangeRatesEntityContract::class => ExchangeRatesEntity::class,
         CurrenciesRepositoryContract::class => CurrenciesRepository::class,
         CurrenciesSearchBuilderContract::class => CurrenciesSearchBuilder::class,
         ModelToDTOConverterContract::class => ModelToDTOConverter::class
     ];
-
-    /**
-     * All of the container singletons that should be registered.
-     *
-     * @var array
-     */
-    public $singletons = [
-        ExchangeRatesApiContract::class => ExchangeRatesApi::class,
-    ];
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-
-    }
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
 }

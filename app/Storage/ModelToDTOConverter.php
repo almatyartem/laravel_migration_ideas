@@ -2,18 +2,19 @@
 
 namespace App\Storage;
 
-use App\Common\Contracts\Storage\ModelConvertableToDTO;
+use App\Contracts\Storage\DTOContract;
+use App\Contracts\Storage\ModelContract;
+use App\Contracts\Storage\ModelToDTOConverterContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Spatie\DataTransferObject\DataTransferObject;
 
-class EloquentToDTOConverter
+class ModelToDTOConverter implements ModelToDTOConverterContract
 {
     /**
-    * @param ModelConvertableToDTO|Model $record
-    * @return DataTransferObject
+    * @param ModelContract|Model $record
+    * @return DTOContract
     */
-    public static function fromEloquent(ModelConvertableToDTO $record): DataTransferObject
+    public static function fromEloquent(ModelContract $record): DTOContract
     {
         $dtoClassName = $record->getDTOClassName();
 
@@ -27,7 +28,7 @@ class EloquentToDTOConverter
 
     /**
      * @param Collection $collection
-     * @return DataTransferObject[]
+     * @return DTOContract[]
      */
     public static function fromCollection(Collection $collection): array
     {
@@ -63,8 +64,7 @@ class EloquentToDTOConverter
         $result = [];
 
         foreach($relations as $k => $v){
-            $test = 1;
-            if($v instanceof ModelConvertableToDTO){
+            if($v instanceof ModelContract){
                 $result[$k] = self::fromEloquent($v);
             } elseif($v instanceof Collection) {
                 $result[$k] = self::fromCollection($v);
