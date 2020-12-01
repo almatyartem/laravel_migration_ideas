@@ -1,15 +1,11 @@
 <?php
 
-namespace App\Storage\MultiCurrencies\Currencies;
+namespace App\Modules\Storage\DbDataProviders\Eloquent\Models;
 
-use App\Contracts\Storage\ModelContract;
-use App\Storage\MultiCurrencies\ExchangeRates\ExchangeRatesModel;
-use App\Storage\Store\Prices\PricesModel;
-use App\Storage\Store\Products\ProductsModel;
-use Illuminate\Database\Eloquent\Model;
+use App\Modules\Storage\Dto\CurrencyDTO;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class CurrenciesModel extends Model implements ModelContract
+class Currency extends BaseEloquentModel
 {
     /**
      * @var string
@@ -37,7 +33,7 @@ class CurrenciesModel extends Model implements ModelContract
      */
     public function getDTOClassName(): string
     {
-        return CurrenciesDTO::class;
+        return CurrencyDTO::class;
     }
 
     /**
@@ -45,7 +41,7 @@ class CurrenciesModel extends Model implements ModelContract
      */
     public function exchange_rates()
     {
-        return $this->hasMany(ExchangeRatesModel::class, 'currency_id');
+        return $this->hasMany(ExchangeRate::class, 'currency_id');
     }
 
     /**
@@ -53,7 +49,7 @@ class CurrenciesModel extends Model implements ModelContract
      */
     public function prices()
     {
-        return $this->hasMany(PricesModel::class, 'currency_id');
+        return $this->hasMany(Price::class, 'currency_id');
     }
 
     /**
@@ -61,6 +57,6 @@ class CurrenciesModel extends Model implements ModelContract
      */
     public function products()
     {
-        return $this->hasMany(ProductsModel::class, 'supplier_currency_id');
+        return $this->hasMany(Product::class, 'supplier_currency_id');
     }
 }

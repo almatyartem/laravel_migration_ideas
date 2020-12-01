@@ -1,20 +1,34 @@
 <?php
 
-namespace App\Storage;
+namespace App\Modules\Storage\DbDataProviders\Eloquent;
 
-use App\Contracts\Storage\DTOContract;
-use App\Contracts\Storage\ModelContract;
-use App\Contracts\Storage\ModelToDTOConverterContract;
+use App\Contracts\DTOConvertable;
+use App\Contracts\ModelDTOContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-class ModelToDTOConverter implements ModelToDTOConverterContract
+class ModelToDTOConverter
 {
     /**
-    * @param ModelContract|Model $record
-    * @return DTOContract
-    */
-    public static function fromEloquent(ModelContract $record): DTOContract
+     * @param $data
+     * @return ModelDTOContract|ModelDTOContract[]|null
+     */
+    public static function fromModelOrCollection($data)
+    {
+        if($data instanceof DTOConvertable){
+            return self::fromEloquent($data);
+        } elseif($data instanceof Collection) {
+            return self::fromCollection($data);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param Model $record
+     * @return ModelDTOContract
+     */
+    public static function fromEloquent(DTOConvertable $record): ModelDTOContract
     {
         $dtoClassName = $record->getDTOClassName();
 
@@ -28,7 +42,7 @@ class ModelToDTOConverter implements ModelToDTOConverterContract
 
     /**
      * @param Collection $collection
-     * @return DTOContract[]
+     * @return ModelDTOContract[]
      */
     public static function fromCollection(Collection $collection): array
     {
@@ -55,20 +69,16 @@ class ModelToDTOConverter implements ModelToDTOConverterContract
     }
 
     /**
-     * @param Model $record
+     * @param DTOConvertable $record
      * @return array
      */
-    protected static function getRelations(Model $record) : array
+    protected static function getRelations(DTOConvertable $record) : array
     {
         $relations = $record->getRelations();
         $result = [];
 
         foreach($relations as $k => $v){
-            if($v instanceof ModelContract){
-                $result[$k] = self::fromEloquent($v);
-            } elseif($v instanceof Collection) {
-                $result[$k] = self::fromCollection($v);
-            }
+            $result[$k] = self::fromModelOrCollection($v);
         }
 
         return $result;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Contracts\Storage;
+namespace App\Contracts;
 
-interface DTOContract
+interface ModelDTOContract
 {
     /**
      * @return array

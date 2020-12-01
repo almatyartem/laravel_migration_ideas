@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Storage\Store\Prices;
+namespace App\Modules\Storage\Dto;
 
-use App\Contracts\Storage\DTOContract;
+use App\Contracts\ModelDTOContract;
 use Spatie\DataTransferObject\DataTransferObject;
 
-class PricesDTO extends DataTransferObject implements DTOContract
+class PriceDTO extends DataTransferObject implements ModelDTOContract
 {
     public int $id;
     public int $productId;

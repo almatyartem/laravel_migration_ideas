@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Storage\MultiCurrencies\ExchangeRates;
+namespace App\Modules\Storage\DbDataProviders\Eloquent\Models;
 
-use App\Contracts\Storage\ModelContract;
-use App\Storage\MultiCurrencies\Currencies\CurrenciesModel;
-use Illuminate\Database\Eloquent\Model;
+use App\Modules\Storage\Dto\ExchangeRateDTO;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ExchangeRatesModel extends Model implements ModelContract
+class ExchangeRate extends BaseEloquentModel
 {
     /**
      * @var string
@@ -39,7 +37,7 @@ class ExchangeRatesModel extends Model implements ModelContract
      */
     public function getDTOClassName(): string
     {
-        return ExchangeRatesDTO::class;
+        return ExchangeRateDTO::class;
     }
 
     /**
@@ -47,6 +45,6 @@ class ExchangeRatesModel extends Model implements ModelContract
      */
     public function currency()
     {
-        return $this->belongsTo(CurrenciesModel::class, 'currency_id');
+        return $this->belongsTo(Currency::class, 'currency_id');
     }
 }

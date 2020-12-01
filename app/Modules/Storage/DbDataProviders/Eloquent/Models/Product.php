@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Storage\Store\Products;
+namespace App\Modules\Storage\DbDataProviders\Eloquent\Models;
 
-use App\Contracts\Storage\ModelContract;
-use App\Storage\MultiCurrencies\Currencies\CurrenciesModel;
-use App\Storage\Store\Prices\PricesModel;
-use Illuminate\Database\Eloquent\Model;
+use App\Modules\Storage\Dto\ProductDTO;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ProductsModel extends Model implements ModelContract
+class Product extends BaseEloquentModel
 {
     /**
      * @var string
@@ -43,7 +40,7 @@ class ProductsModel extends Model implements ModelContract
      */
     public function getDTOClassName(): string
     {
-        return ProductsDTO::class;
+        return ProductDTO::class;
     }
 
     /**
@@ -51,7 +48,7 @@ class ProductsModel extends Model implements ModelContract
      */
     public function supplier_currency()
     {
-        return $this->belongsTo(CurrenciesModel::class, 'supplier_currency_id');
+        return $this->belongsTo(Currency::class, 'supplier_currency_id');
     }
 
     /**
@@ -59,6 +56,6 @@ class ProductsModel extends Model implements ModelContract
      */
     public function prices()
     {
-        return $this->hasMany(PricesModel::class, 'currency_id');
+        return $this->hasMany(Price::class, 'currency_id');
     }
 }
