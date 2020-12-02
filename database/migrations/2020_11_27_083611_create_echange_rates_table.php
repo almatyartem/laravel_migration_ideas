@@ -17,7 +17,7 @@ class CreateEchangeRatesTable extends Migration
             $table->id();
             $table->integer('currency_id');
             $table->float('rate_to_usd');
-            $table->date('date')->unique();
+            $table->date('date');
             $table->timestamps();
         });
     }

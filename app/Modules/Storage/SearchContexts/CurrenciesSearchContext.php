@@ -2,34 +2,38 @@
 
 namespace App\Modules\Storage\SearchContexts;
 
-use App\Contracts\ModelDTOContract;
-use App\Contracts\SearchContextContract;
-use App\Modules\Storage\DbDataProviders\Eloquent\Models\Currency;
-use App\Modules\Storage\DbDataProviders\Eloquent\ModelToDTOConverter;
-use App\Modules\Storage\Dto\CurrencyDTO;
-use App\Modules\Storage\Repositories\CurrenciesRepository;
+use App\Contracts\SearchContexts\CurrenciesSearchContextContract;
+use App\Models\DTO\Extendable\DTOModel;
+use App\Modules\Storage\Eloquent\Models\Currency;
+use App\Models\DTO\CurrencyDTO;
+use App\Modules\Storage\SearchContexts\Extendable\BaseSearchContext;
 
-class CurrenciesSearchContext extends BaseSearchContext implements SearchContextContract
+class CurrenciesSearchContext extends BaseSearchContext implements CurrenciesSearchContextContract
 {
-    /**
-     * @var CurrenciesRepository
-     */
-    protected CurrenciesRepository $repository;
-
     /**
      * CurrenciesSearchContext constructor.
      * @param Currency $model
-     * @param ModelToDTOConverter $converter
      */
-    function __construct(Currency $model, ModelToDTOConverter $converter)
+    function __construct(Currency $model)
     {
-        parent::__construct($model, $converter);
+        parent::__construct($model);
     }
 
     /**
-     * @return CurrenciesSearchContext
+     * @param string $code
+     * @return $this|CurrenciesSearchContextContract
      */
-    public function withProducts() : CurrenciesSearchContext
+    public function byCode(string $code) : CurrenciesSearchContextContract
+    {
+        $this->builder = $this->builder->where('code', $code);
+
+        return $this;
+    }
+
+    /**
+     * @return CurrenciesSearchContextContract
+     */
+    public function withProducts() : CurrenciesSearchContextContract
     {
         $this->builder = $this->builder->with('products');
 
@@ -37,7 +41,7 @@ class CurrenciesSearchContext extends BaseSearchContext implements SearchContext
     }
 
     /**
-     * @return CurrencyDTO|ModelDTOContract|null
+     * @return CurrencyDTO|DTOModel|null
      */
     public function first() : ?CurrencyDTO
     {
