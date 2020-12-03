@@ -2,7 +2,7 @@
 
 namespace App\Modules\Storage\Eloquent\DbDataProviders;
 
-use App\Contracts\SearchContexts\ExchangeRatesSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\ExchangeRatesSearchContextContract;
 use App\Modules\Storage\Contracts\CrudWithSearchDbDataProviderContract;
 use App\Modules\Storage\Eloquent\DbDataProviders\Extendable\CrudWithSearch;
 use App\Modules\Storage\Eloquent\Models\ExchangeRate;

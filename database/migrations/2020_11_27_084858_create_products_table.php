@@ -17,8 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('code')->unique();
-            $table->float('supplier_price');
-            $table->integer('supplier_currency_id');
+            $table->float('usd_price');
             $table->timestamps();
         });
     }

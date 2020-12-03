@@ -22,8 +22,7 @@ class Product extends BaseEloquentModel
     protected $fillable = [
         'title',
         'code',
-        'supplier_price',
-        'supplier_currency_id'
+        'usd_price',
     ];
 
     /**
@@ -32,8 +31,7 @@ class Product extends BaseEloquentModel
     protected array $rules = [
         'title' => ['required'],
         'code' => ['required'],
-        'supplier_price' => ['required'],
-        'supplier_currency_id' => ['required','integer','exists:currencies,id']
+        'usd_price' => ['required']
     ];
 
     /**
@@ -42,21 +40,5 @@ class Product extends BaseEloquentModel
     public function getDTOClassName(): string
     {
         return ProductDTO::class;
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function supplier_currency()
-    {
-        return $this->belongsTo(Currency::class, 'supplier_currency_id');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function prices()
-    {
-        return $this->hasMany(Price::class, 'currency_id');
     }
 }

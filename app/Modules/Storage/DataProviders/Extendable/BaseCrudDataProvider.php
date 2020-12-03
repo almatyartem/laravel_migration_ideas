@@ -4,7 +4,7 @@ namespace App\Modules\Storage\DataProviders\Extendable;
 
 use App\Exceptions\ValidationException;
 use App\Modules\Storage\Contracts\CrudWithSearchDbDataProviderContract;
-use App\Contracts\SearchContexts\BaseSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\BaseSearchContextContract;
 use App\Models\DTO\Extendable\DTOModel;
 
 abstract class BaseCrudDataProvider

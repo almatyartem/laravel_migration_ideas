@@ -2,7 +2,7 @@
 
 namespace App\Modules\Storage\SearchContexts;
 
-use App\Contracts\SearchContexts\ProductsSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\ProductsSearchContextContract;
 use App\Models\DTO\Extendable\DTOModel;
 use App\Modules\Storage\Eloquent\Models\Product;
 use App\Models\DTO\ProductDTO;

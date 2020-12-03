@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Modules\MultiCurrencies;
+namespace App\Modules\MultiCurrencies\Services;
 
-use App\Contracts\DataProviders\CurrenciesDataProviderContract;
-use App\Contracts\DataProviders\ExchangeRatesDataProviderContract;
+use App\Contracts\MultiCurrencies\Services\CurrenciesConverterContract;
+use App\Contracts\Storage\Services\DataProviders\CurrenciesDataProviderContract;
+use App\Contracts\Storage\Services\DataProviders\ExchangeRatesDataProviderContract;
 use App\Exceptions\ValidationException;
+use App\Models\DTO\ExchangeRateDTO;
 
-class MultiCurrenciesService
+class MultiCurrenciesApi implements CurrenciesConverterContract
 {
     /**
      * @var ExchangeRatesDataProviderContract
@@ -30,24 +32,18 @@ class MultiCurrenciesService
     }
 
     /**
-     * @param string $currencyCode
-     * @param float $usdAmount
-     * @return string|null
+     * @return ExchangeRateDTO[]|null
      */
-    public function getFormattedValueInCurrency(string $currencyCode, float $usdAmount) : ?string
+    public function getCurrentExchangeRates() : ?array
     {
         $date = date('Y-m-d');
-        $currency = $this->currenciesDP->search()->byCode($currencyCode)->first();
-        if($currency) {
-            $rate = $this->exchangeRatesDP->search()->byDate($date)->byCurrencyId($currency->id)->first();
-            if($rate){
-                $value = $rate->rateToUsd * $usdAmount;
 
-                return $currency->sign ? $currency->sign.$value : $value .' ('.$currency->code.')';
-            }
-        }
+        $rates = $this->exchangeRatesDP->search()
+            ->byDate($date)
+            ->withCurrencies()
+            ->find();
 
-        return null;
+        return $rates;
     }
 
     /**

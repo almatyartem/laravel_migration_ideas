@@ -2,7 +2,7 @@
 
 namespace App\Modules\Storage\Eloquent\DbDataProviders;
 
-use App\Contracts\SearchContexts\CurrenciesSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\CurrenciesSearchContextContract;
 use App\Modules\Storage\Contracts\CrudWithSearchDbDataProviderContract;
 use App\Modules\Storage\Eloquent\DbDataProviders\Extendable\CrudWithSearch;
 use App\Modules\Storage\Eloquent\Models\Currency;

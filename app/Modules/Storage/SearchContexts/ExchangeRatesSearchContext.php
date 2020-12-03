@@ -2,7 +2,7 @@
 
 namespace App\Modules\Storage\SearchContexts;
 
-use App\Contracts\SearchContexts\ExchangeRatesSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\ExchangeRatesSearchContextContract;
 use App\Models\DTO\Extendable\DTOModel;
 use App\Modules\Storage\Eloquent\Models\ExchangeRate;
 use App\Models\DTO\ExchangeRateDTO;
@@ -41,9 +41,7 @@ class ExchangeRatesSearchContext extends BaseSearchContext implements ExchangeRa
      */
     public function byDate(string $date) : ExchangeRatesSearchContext
     {
-        $this->builder->where('date', $date);
-
-        return $this;
+        return $this->whereEqual('date', $date);
     }
 
     /**
@@ -52,8 +50,14 @@ class ExchangeRatesSearchContext extends BaseSearchContext implements ExchangeRa
      */
     public function byCurrencyId(int $currencyId) : ExchangeRatesSearchContext
     {
-        $this->builder->where('currency_id', $currencyId);
+        return $this->whereEqual('currency_id', $currencyId);
+    }
 
-        return $this;
+    /**
+     * @return ExchangeRatesSearchContext
+     */
+    public function withCurrencies() : ExchangeRatesSearchContext
+    {
+        return $this->with('currency');
     }
 }

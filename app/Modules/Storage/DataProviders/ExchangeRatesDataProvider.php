@@ -2,8 +2,8 @@
 
 namespace App\Modules\Storage\DataProviders;
 
-use App\Contracts\DataProviders\ExchangeRatesDataProviderContract;
-use App\Contracts\SearchContexts\BaseSearchContextContract;
+use App\Contracts\Storage\Services\DataProviders\ExchangeRatesDataProviderContract;
+use App\Contracts\Storage\Services\SearchContexts\BaseSearchContextContract;
 use App\Exceptions\ValidationException;
 use App\Models\DTO\Extendable\DTOModel;
 use App\Modules\Storage\DataProviders\Extendable\BaseCrudDataProvider;

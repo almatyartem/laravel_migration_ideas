@@ -24,13 +24,13 @@ class CurrenciesDataProviderTest extends TestCase
          */
         $provider = app()->make(CurrenciesDataProvider::class);
 
-        $newRecord = $provider->create(['code' => 'test']);
+        $newRecord = $provider->create('test');
         $this->assertInstanceOf(CurrencyDTO::class, $newRecord);
         $this->assertTrue($newRecord->code == 'test');
 
         try {
             $exception = null;
-            $provider->create(['code' => 'test']);
+            $provider->create('test');
         } catch(ValidationException $validationException) {
             $exception = $validationException;
         }
@@ -38,21 +38,11 @@ class CurrenciesDataProviderTest extends TestCase
         $errors = $exception->getErrors();
         $this->assertTrue($errors == ['code' => ['Unique' => ['currencies']]]);
 
-        try {
-            $exception = null;
-            $provider->create([]);
-        } catch(ValidationException $validationException) {
-            $exception = $validationException;
-        }
-        $this->assertInstanceOf(ValidationException::class, $exception);
-        $errors = $exception->getErrors();
-        $this->assertTrue($errors == ['code' => ['Required' => []]]);
-
-        $updateResult = $provider->update($newRecord->id, ['code' => 'test2']);
+        $updateResult = $provider->setSign($newRecord->id, '$');
         $this->assertTrue($updateResult === true);
 
         $updatedRecord = $provider->read($newRecord->id);
-        $this->assertTrue($updatedRecord->code == 'test2');
+        $this->assertTrue($updatedRecord->sign == '$');
 
         $deleteResult = $provider->delete($newRecord->id);
         $this->assertTrue($deleteResult === true);

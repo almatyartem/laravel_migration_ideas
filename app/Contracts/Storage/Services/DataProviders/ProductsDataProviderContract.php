@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Contracts\DataProviders;
+namespace App\Contracts\Storage\Services\DataProviders;
 
-use App\Contracts\SearchContexts\BaseSearchContextContract;
-use App\Contracts\SearchContexts\ProductsSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\ProductsSearchContextContract;
 use App\Models\DTO\ProductDTO;
 
 interface ProductsDataProviderContract
 {
     /**
-     * @return ProductsSearchContextContract|BaseSearchContextContract
+     * @return ProductsSearchContextContract
      */
     function search() : ProductsSearchContextContract;
 

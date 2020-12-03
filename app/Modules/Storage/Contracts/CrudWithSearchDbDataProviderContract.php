@@ -2,7 +2,8 @@
 
 namespace App\Modules\Storage\Contracts;
 
-use App\Contracts\SearchContexts\BaseSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\BaseSearchContextContract;
+use App\Exceptions\NotFoundException;
 use App\Exceptions\ValidationException;
 use App\Models\DTO\Extendable\DTOModel;
 
@@ -26,6 +27,7 @@ interface CrudWithSearchDbDataProviderContract
      * @param array $data
      * @return bool
      * @throws ValidationException
+     * @throws NotFoundException
      */
     public function update(int $id, array $data) : bool;
 

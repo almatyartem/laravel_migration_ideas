@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Modules\MultiCurrencies\MultiCurrenciesService;
-use App\Modules\MultiCurrencies\Models\ExchangeRatesEntity;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

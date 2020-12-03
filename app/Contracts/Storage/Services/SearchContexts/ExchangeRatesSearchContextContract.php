@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Contracts\SearchContexts;
+namespace App\Contracts\Storage\Services\SearchContexts;
 
 use App\Models\DTO\ExchangeRateDTO;
+use App\Modules\Storage\SearchContexts\ExchangeRatesSearchContext;
 
 interface ExchangeRatesSearchContextContract extends BaseSearchContextContract
 {
@@ -27,4 +28,9 @@ interface ExchangeRatesSearchContextContract extends BaseSearchContextContract
      * @return ExchangeRatesSearchContextContract
      */
     public function byCurrencyId(int $currencyId) : ExchangeRatesSearchContextContract;
+
+    /**
+     * @return ExchangeRatesSearchContext
+     */
+    public function withCurrencies() : ExchangeRatesSearchContext;
 }

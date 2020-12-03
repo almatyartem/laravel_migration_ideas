@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use App\Http\ApiResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Validator;
 
 class ValidationException extends \Exception
@@ -21,5 +23,13 @@ class ValidationException extends \Exception
     public function getErrors() : array
     {
         return $this->validator->failed();
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function render()
+    {
+        return ApiResponse::errorResponse(400, ['validation_errors' => $this->getErrors()]);
     }
 }

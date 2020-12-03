@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Contracts\DataProviders;
+namespace App\Contracts\Storage\Services\DataProviders;
 
-use App\Contracts\SearchContexts\BaseSearchContextContract;
-use App\Contracts\SearchContexts\CurrenciesSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\BaseSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\CurrenciesSearchContextContract;
 use App\Exceptions\ValidationException;
 use App\Models\DTO\Extendable\DTOModel;
 use App\Models\DTO\CurrencyDTO;

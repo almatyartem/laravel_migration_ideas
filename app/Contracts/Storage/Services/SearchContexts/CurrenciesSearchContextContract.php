@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts\SearchContexts;
+namespace App\Contracts\Storage\Services\SearchContexts;
 
 use App\Models\DTO\CurrencyDTO;
 

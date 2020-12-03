@@ -2,7 +2,8 @@
 
 namespace App\Modules\Storage\Eloquent\DbDataProviders\Extendable;
 
-use App\Contracts\SearchContexts\BaseSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\BaseSearchContextContract;
+use App\Exceptions\NotFoundException;
 use App\Exceptions\ValidationException;
 use App\Modules\Storage\Contracts\CrudWithSearchDbDataProviderContract;
 use App\Models\DTO\Extendable\DTOModel;
@@ -55,13 +56,19 @@ abstract class CrudWithSearch implements CrudWithSearchDbDataProviderContract
      * @param int $id
      * @param array $data
      * @return bool
+     * @throws NotFoundException
      * @throws ValidationException
      */
     public function update(int $id, array $data): bool
     {
         $this->eloquentModel->validate($data, false);
+        $record = $this->eloquentModel->find($id);
 
-        return $this->eloquentModel->find($id)->update($data);
+        if(!$record){
+            throw new NotFoundException();
+        }
+
+        return $record->update($data);
     }
 
     /**

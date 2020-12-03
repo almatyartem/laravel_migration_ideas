@@ -50,14 +50,6 @@ class Currency extends BaseEloquentModel
     /**
      * @return HasMany
      */
-    public function prices()
-    {
-        return $this->hasMany(Price::class, 'currency_id');
-    }
-
-    /**
-     * @return HasMany
-     */
     public function products()
     {
         return $this->hasMany(Product::class, 'supplier_currency_id');

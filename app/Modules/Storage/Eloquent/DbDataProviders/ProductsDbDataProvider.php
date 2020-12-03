@@ -2,7 +2,7 @@
 
 namespace App\Modules\Storage\Eloquent\DbDataProviders;
 
-use App\Contracts\SearchContexts\ProductsSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\ProductsSearchContextContract;
 use App\Modules\Storage\Contracts\CrudWithSearchDbDataProviderContract;
 use App\Modules\Storage\Eloquent\DbDataProviders\Extendable\CrudWithSearch;
 use App\Modules\Storage\Eloquent\Models\Product;

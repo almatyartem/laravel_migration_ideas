@@ -2,8 +2,8 @@
 
 namespace App\Modules\Storage\DataProviders;
 
-use App\Contracts\DataProviders\ProductsDataProviderContract;
-use App\Contracts\SearchContexts\BaseSearchContextContract;
+use App\Contracts\Storage\Services\DataProviders\ProductsDataProviderContract;
+use App\Contracts\Storage\Services\SearchContexts\BaseSearchContextContract;
 use App\Models\DTO\Extendable\DTOModel;
 use App\Modules\Storage\DataProviders\Extendable\BaseCrudDataProvider;
 use App\Modules\Storage\Eloquent\DbDataProviders\ProductsDbDataProvider;

@@ -175,7 +175,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        App\Providers\StorageServiceProvider::class,
+        /*
+         * Modules Service Providers...
+         */
+        App\Modules\MultiCurrencies\MultiCurrenciesServiceProvider::class,
+        App\Modules\Storage\StorageServiceProvider::class,
+        App\Modules\WebStore\WebStoreServiceProvider::class,
+        App\Modules\AdminNotificator\AdminNotificatorServiceProvider::class,
+
     ],
 
     /*

@@ -9,8 +9,7 @@ class ProductDTO extends DTOModel
     public int $id;
     public string $title;
     public string $code;
-    public float $supplierPrice;
-    public int $supplierCurrencyId;
+    public float $usdPrice;
     public ?string $createdAt;
     public ?string $updatedAt;
 }

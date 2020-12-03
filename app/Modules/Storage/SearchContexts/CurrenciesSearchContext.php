@@ -2,7 +2,7 @@
 
 namespace App\Modules\Storage\SearchContexts;
 
-use App\Contracts\SearchContexts\CurrenciesSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\CurrenciesSearchContextContract;
 use App\Models\DTO\Extendable\DTOModel;
 use App\Modules\Storage\Eloquent\Models\Currency;
 use App\Models\DTO\CurrencyDTO;

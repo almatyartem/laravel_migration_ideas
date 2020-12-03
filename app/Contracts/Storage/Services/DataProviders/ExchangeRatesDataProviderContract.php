@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Contracts\DataProviders;
+namespace App\Contracts\Storage\Services\DataProviders;
 
-use App\Contracts\SearchContexts\ExchangeRatesSearchContextContract;
+use App\Contracts\Storage\Services\SearchContexts\ExchangeRatesSearchContextContract;
 use App\Exceptions\ValidationException;
 use App\Models\DTO\ExchangeRateDTO;
 
