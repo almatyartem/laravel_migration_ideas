@@ -28,13 +28,15 @@ The application should perform in the background these actions:
 - none of the Module related parts should be placed in the App level
 - each Module must have one Main Service Provider extending Illuminate\Support\ServiceProvider
 - Module's Main Service Provider could include the other Module's Service Providers
-
-## Step-by-step implementation
+- Database Driver (Eloquent by default) should be replaceable
 
 ###Define Modules
-- [Storage](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Modules/Storage)
-> Encapsulates all the logic related to data retrieving/persisting. Default implementation using Eloquent may be 
->replaced by another one
+- [DbDataProviders](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Modules/DbDataProviders)
+> Encapsulates all work with the database. Implemented one provider (Eloquent) which could be replaced by another one
+- [Repositories](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Modules/Repositories)
+> Implement CRUD functionality (create, read, update, all methods)
+- [Search](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Modules/Search)
+> Implement search functionality
 - [WebStore](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Modules/WebStore) 
 > Implements api/Store Endpoint and sync products with third-party API     
 - [MultiCurrencies](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Modules/MultiCurrencies)
@@ -42,24 +44,21 @@ The application should perform in the background these actions:
 - [AdminNotificator](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Modules/AdminNotificator)
 > One place to send different notifications to store administrator 
 
-###Create a database structure using migrations
+###Common App resources
+####Database migrations
 - [products table creating migration](https://github.com/almatyartem/laravel_migration_ideas/blob/master/database/migrations/2020_11_27_084858_create_products_table.php)
 - [currencies table creating migration](https://github.com/almatyartem/laravel_migration_ideas/blob/master/database/migrations/2020_11_27_083250_create_currencies_table.php)
 - [exchange_rates table creating migration](https://github.com/almatyartem/laravel_migration_ideas/blob/master/database/migrations/2020_11_27_083611_create_exchange_rates_table.php)
 
-###Create DTO Classes
+####DTO Classes
 - [CurrencyDTO](https://github.com/almatyartem/laravel_migration_ideas/blob/master/app/Models/DTO/CurrencyDTO.php)
 - [ExchangeRateDTO](https://github.com/almatyartem/laravel_migration_ideas/blob/master/app/Models/DTO/ExchangeRateDTO.php)
 - [ProductDTO](https://github.com/almatyartem/laravel_migration_ideas/blob/master/app/Models/DTO/ProductDTO.php)
 
-###Module Storage
-Architecture overview:
-
-####[DataProviders](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Modules/Storage/DataProviders)
-1. DataProvider can be considered as API (entry point) for one DB table 
-2. DataProviders 
-
-
-###Contracts
-[All contracts](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Contracts)
->Here we 
+####Contracts
+- [DbDataProviders](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Contracts/DbDataProviders)
+- [Repositories](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Contracts/Repositories/Services)
+- [Search](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Contracts/Search/Services)
+- [WebStore](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Contracts/WebStore/Events)   
+- [MultiCurrencies](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Contracts/MultiCurrencies) 
+- [AdminNotificator](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Modules/AdminNotificator)

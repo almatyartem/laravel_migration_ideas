@@ -2,7 +2,7 @@
 
 namespace App\Modules\DbDataProviders\Eloquent\Services\Extendable;
 
-use App\Contracts\QueryBuilderContract;
+use App\Contracts\DbDataProviders\QueryBuilderContract;
 use App\Contracts\Search\Services\BaseSearchContract;
 use App\Exceptions\NotFoundException;
 use App\Exceptions\ValidationException;

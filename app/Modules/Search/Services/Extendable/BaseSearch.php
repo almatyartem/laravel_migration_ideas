@@ -2,7 +2,7 @@
 
 namespace App\Modules\Search\Services\Extendable;
 
-use App\Contracts\QueryBuilderContract;
+use App\Contracts\DbDataProviders\QueryBuilderContract;
 use App\Contracts\Search\Services\BaseSearchContract;
 use App\Models\DTO\Extendable\DTOModel;
 use App\Contracts\DbDataProviders\DbDataProviderContract;

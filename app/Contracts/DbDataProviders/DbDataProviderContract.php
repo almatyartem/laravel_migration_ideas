@@ -2,7 +2,6 @@
 
 namespace App\Contracts\DbDataProviders;
 
-use App\Contracts\QueryBuilderContract;
 use App\Exceptions\NotFoundException;
 use App\Exceptions\ValidationException;
 use App\Models\DTO\Extendable\DTOModel;

@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\DbDataProviders\Eloquent;
 
-use App\Contracts\QueryBuilderContract;
+use App\Contracts\DbDataProviders\QueryBuilderContract;
 use Illuminate\Database\Eloquent\Builder;
 
 class ExtendedBuilder extends Builder implements QueryBuilderContract
