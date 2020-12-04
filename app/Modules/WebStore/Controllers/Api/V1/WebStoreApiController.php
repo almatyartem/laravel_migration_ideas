@@ -2,25 +2,25 @@
 
 namespace App\Modules\WebStore\Controllers\Api\V1;
 
-use App\Contracts\Storage\Services\DataProviders\ProductsDataProviderContract;
+use App\Contracts\Repositories\Services\ProductsRepositoryContract;
 use App\Http\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\DTO\ExchangeRateDTO;
-use App\Modules\MultiCurrencies\Services\CurrenciesApi;
+use App\Modules\MultiCurrencies\Services\ExchangeRatesApi;
 use Illuminate\Http\JsonResponse;
 
 class WebStoreApiController extends Controller
 {
     /**
-     * @param ProductsDataProviderContract $productsDataProvider
-     * @param CurrenciesApi $multiCurrenciesApi
+     * @param ProductsRepositoryContract $productsRepository
+     * @param ExchangeRatesApi $exchangeRatesApi
      * @return JsonResponse
      */
-    public function getProducts(ProductsDataProviderContract $productsDataProvider, CurrenciesApi $multiCurrenciesApi) : JsonResponse
+    public function getProducts(ProductsRepositoryContract $productsRepository, ExchangeRatesApi $exchangeRatesApi) : JsonResponse
     {
         $result = [];
-        $products = $productsDataProvider->search()->find();
-        $exchangeRates = $multiCurrenciesApi->getCurrentExchangeRates();
+        $products = $productsRepository->all();
+        $exchangeRates = $exchangeRatesApi->getCurrentExchangeRates();
 
         if($products){
             foreach($products as $product){

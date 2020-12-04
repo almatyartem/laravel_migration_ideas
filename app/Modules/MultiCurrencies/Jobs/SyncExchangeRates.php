@@ -2,8 +2,10 @@
 
 namespace App\Modules\MultiCurrencies\Jobs;
 
-use App\Contracts\Storage\Services\DataProviders\CurrenciesDataProviderContract;
-use App\Contracts\Storage\Services\DataProviders\ExchangeRatesDataProviderContract;
+use App\Contracts\Repositories\Services\CurrenciesRepositoryContract;
+use App\Contracts\Repositories\Services\ExchangeRatesRepositoryContract;
+use App\Contracts\Search\Services\CurrenciesSearchContract;
+use App\Contracts\Search\Services\ExchangeRatesSearchContract;
 use App\Exceptions\ValidationException;
 use App\Modules\MultiCurrencies\Events\NewCurrencyAdded;
 use Illuminate\Bus\Queueable;
@@ -17,23 +19,26 @@ class SyncExchangeRates implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * @param ExchangeRatesDataProviderContract $exchangeRatesDP
-     * @param CurrenciesDataProviderContract $currenciesDP
+     * @param ExchangeRatesRepositoryContract $exchangeRatesRepository
+     * @param ExchangeRatesSearchContract $exchangeRatesSearch
+     * @param CurrenciesRepositoryContract $currenciesRepository
+     * @param CurrenciesSearchContract $currenciesSearch
      * @throws ValidationException
      */
-    public function handle(ExchangeRatesDataProviderContract $exchangeRatesDP, CurrenciesDataProviderContract $currenciesDP)
+    public function handle(ExchangeRatesRepositoryContract $exchangeRatesRepository, ExchangeRatesSearchContract $exchangeRatesSearch,
+                           CurrenciesRepositoryContract $currenciesRepository, CurrenciesSearchContract $currenciesSearch)
     {
         $exchangeRates = $this->getExchangeRatesFromThirdPartyApi();
         $date = date('Y-m-d');
 
         foreach($exchangeRates as $currencyCode => $exchangeRateValue){
-            $currency = $currenciesDP->search()->byCode($currencyCode)->first();
+            $currency = $currenciesSearch->byCode($currencyCode)->first();
             if(!$currency) {
-                $currency = $currenciesDP->create($currencyCode);
+                $currency = $currenciesRepository->create($currencyCode);
                 event(new NewCurrencyAdded($currency));
             }
-            if(!$exchangeRatesDP->search()->byDate($date)->byCurrencyId($currency->id)->first()){
-                $exchangeRatesDP->add($currency->id, $exchangeRateValue, $date);
+            if(!$exchangeRatesSearch->byDate($date)->byCurrencyId($currency->id)->first()){
+                $exchangeRatesRepository->add($currency->id, $exchangeRateValue, $date);
             }
         }
     }

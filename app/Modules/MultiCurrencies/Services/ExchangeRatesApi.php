@@ -3,8 +3,9 @@
 namespace App\Modules\MultiCurrencies\Services;
 
 use App\Contracts\MultiCurrencies\Services\ExchangeRatesProviderContract;
-use App\Contracts\Storage\Services\DataProviders\CurrenciesDataProviderContract;
-use App\Contracts\Storage\Services\DataProviders\ExchangeRatesDataProviderContract;
+use App\Contracts\Repositories\Services\CurrenciesRepositoryContract;
+use App\Contracts\Repositories\Services\ExchangeRatesRepositoryContract;
+use App\Contracts\Search\Services\ExchangeRatesSearchContract;
 use App\Exceptions\ValidationException;
 use App\Models\DTO\CurrencyDTO;
 use App\Models\DTO\ExchangeRateDTO;
@@ -12,17 +13,17 @@ use App\Models\DTO\ExchangeRateDTO;
 class ExchangeRatesApi implements ExchangeRatesProviderContract
 {
     /**
-     * @var ExchangeRatesDataProviderContract
+     * @var ExchangeRatesSearchContract
      */
-    protected ExchangeRatesDataProviderContract $exchangeRatesDP;
+    protected ExchangeRatesSearchContract $exchangeRatesSearch;
 
     /**
      * ExchangeRatesApi constructor.
-     * @param ExchangeRatesDataProviderContract $exchangeRatesDP
+     * @param ExchangeRatesSearchContract $exchangeRatesSearch
      */
-    function __construct(ExchangeRatesDataProviderContract $exchangeRatesDP)
+    function __construct(ExchangeRatesSearchContract $exchangeRatesSearch)
     {
-        $this->exchangeRatesDP = $exchangeRatesDP;
+        $this->exchangeRatesSearch = $exchangeRatesSearch;
     }
 
     /**
@@ -32,10 +33,7 @@ class ExchangeRatesApi implements ExchangeRatesProviderContract
     {
         $date = date('Y-m-d');
 
-        $rates = $this->exchangeRatesDP->search()
-            ->byDate($date)
-            ->withCurrencies()
-            ->find();
+        $rates = $this->exchangeRatesSearch->byDate($date)->withCurrencies()->find();
 
         return $rates;
     }

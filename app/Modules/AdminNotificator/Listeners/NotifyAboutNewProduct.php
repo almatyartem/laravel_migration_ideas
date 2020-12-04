@@ -2,7 +2,7 @@
 
 namespace App\Modules\AdminNotificator\Listeners;
 
-use App\Contracts\MultiCurrencies\Events\NewProductAddedEventContract;
+use App\Contracts\WebStore\Events\NewProductAddedEventContract;
 
 class NotifyAboutNewProduct
 {

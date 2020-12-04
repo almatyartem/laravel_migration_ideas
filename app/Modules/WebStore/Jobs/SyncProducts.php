@@ -2,7 +2,8 @@
 
 namespace App\Modules\WebStore\Jobs;
 
-use App\Contracts\Storage\Services\DataProviders\ProductsDataProviderContract;
+use App\Contracts\Repositories\Services\ProductsRepositoryContract;
+use App\Contracts\Search\Services\ProductsSearchContract;
 use App\Modules\MultiCurrencies\Events\NewProductAdded;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,20 +17,21 @@ class SyncProducts implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * @param ProductsDataProviderContract $productsDP
+     * @param ProductsRepositoryContract $productsRepository
+     * @param ProductsSearchContract $productsSearch
      */
-    public function handle(ProductsDataProviderContract $productsDP)
+    public function handle(ProductsRepositoryContract $productsRepository, ProductsSearchContract $productsSearch)
     {
         Log::info('SyncProducts');
         $products = $this->getProductsFromSupplierApi();
 
         foreach($products as $code => $productData){
-            $product = $productsDP->search()->byCode($code)->first();
+            $product = $productsSearch->byCode($code)->first();
             if(!$product) {
-                $product = $productsDP->create($code, $productData['title'], $productData['price']);
+                $product = $productsRepository->create($code, $productData['title'], $productData['price']);
                 event(new NewProductAdded($product));
             } elseif($product->usdPrice != $productData['price']) {
-                $productsDP->updatePrice($product->id, $productData['price']);
+                $productsRepository->updatePrice($product->id, $productData['price']);
             }
         }
     }

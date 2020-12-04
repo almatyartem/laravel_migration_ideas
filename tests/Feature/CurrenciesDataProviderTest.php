@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Exceptions\ValidationException;
 use App\Models\DTO\CurrencyDTO;
-use App\Modules\Storage\DataProviders\CurrenciesDataProvider;
+use App\Modules\Repositories\Services\CurrenciesRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -20,9 +20,9 @@ class CurrenciesDataProviderTest extends TestCase
     public function testCrud()
     {
         /**
-         * @var $provider CurrenciesDataProvider
+         * @var $provider CurrenciesRepository
          */
-        $provider = app()->make(CurrenciesDataProvider::class);
+        $provider = app()->make(CurrenciesRepository::class);
 
         $newRecord = $provider->create('test');
         $this->assertInstanceOf(CurrencyDTO::class, $newRecord);

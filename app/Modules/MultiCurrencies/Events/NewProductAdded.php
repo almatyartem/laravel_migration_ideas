@@ -2,7 +2,7 @@
 
 namespace App\Modules\MultiCurrencies\Events;
 
-use App\Contracts\MultiCurrencies\Events\NewProductAddedEventContract;
+use App\Contracts\WebStore\Events\NewProductAddedEventContract;
 use App\Models\DTO\ProductDTO;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;

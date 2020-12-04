@@ -3,7 +3,7 @@
 namespace App\Modules\AdminNotificator;
 
 use App\Contracts\MultiCurrencies\Events\NewCurrencyAddedEventContract;
-use App\Contracts\MultiCurrencies\Events\NewProductAddedEventContract;
+use App\Contracts\WebStore\Events\NewProductAddedEventContract;
 use App\Modules\AdminNotificator\Listeners\NotifyAboutNewCurrency;
 use App\Modules\AdminNotificator\Listeners\NotifyAboutNewProduct;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;

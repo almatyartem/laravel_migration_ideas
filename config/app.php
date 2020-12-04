@@ -178,11 +178,12 @@ return [
         /*
          * Modules Service Providers...
          */
+        App\Modules\DbDataProviders\DbDataProvidersServiceProvider::class,
+        App\Modules\Repositories\RepositoriesServiceProvider::class,
+        App\Modules\Search\SearchServiceProvider::class,
         App\Modules\MultiCurrencies\MultiCurrenciesServiceProvider::class,
-        App\Modules\Storage\StorageServiceProvider::class,
         App\Modules\WebStore\WebStoreServiceProvider::class,
         App\Modules\AdminNotificator\AdminNotificatorServiceProvider::class,
-
     ],
 
     /*

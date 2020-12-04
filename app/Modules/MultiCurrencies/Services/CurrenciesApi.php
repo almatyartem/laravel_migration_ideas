@@ -2,24 +2,24 @@
 
 namespace App\Modules\MultiCurrencies\Services;
 
-use App\Contracts\Storage\Services\DataProviders\CurrenciesDataProviderContract;
+use App\Contracts\Repositories\Services\CurrenciesRepositoryContract;
 use App\Exceptions\ValidationException;
 use App\Models\DTO\CurrencyDTO;
 
 class CurrenciesApi
 {
     /**
-     * @var CurrenciesDataProviderContract
+     * @var CurrenciesRepositoryContract
      */
-    protected CurrenciesDataProviderContract $currenciesDP;
+    protected CurrenciesRepositoryContract $currenciesRepository;
 
     /**
      * CurrenciesApi constructor.
-     * @param CurrenciesDataProviderContract $currenciesDP
+     * @param CurrenciesRepositoryContract $currenciesRepository
      */
-    function __construct(CurrenciesDataProviderContract $currenciesDP)
+    function __construct(CurrenciesRepositoryContract $currenciesRepository)
     {
-        $this->currenciesDP = $currenciesDP;
+        $this->currenciesRepository = $currenciesRepository;
     }
 
     /**
@@ -27,7 +27,7 @@ class CurrenciesApi
      */
     public function getAllCurrencies() : ?array
     {
-        return $this->currenciesDP->search()->find();
+        return $this->currenciesRepository->all();
     }
 
     /**
@@ -38,6 +38,6 @@ class CurrenciesApi
      */
     public function setCurrencySign(int $currencyId, string $sign) : bool
     {
-        return $this->currenciesDP->setSign($currencyId, $sign);
+        return $this->currenciesRepository->setSign($currencyId, $sign);
     }
 }
