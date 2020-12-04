@@ -2,7 +2,7 @@
 
 namespace App\Contracts\MultiCurrencies\Services;
 
-interface CurrenciesConverterContract
+interface ExchangeRatesProviderContract
 {
     /**
      * @return array|null

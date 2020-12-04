@@ -4,6 +4,7 @@ namespace App\Modules\MultiCurrencies\Jobs;
 
 use App\Contracts\Storage\Services\DataProviders\CurrenciesDataProviderContract;
 use App\Contracts\Storage\Services\DataProviders\ExchangeRatesDataProviderContract;
+use App\Exceptions\ValidationException;
 use App\Modules\MultiCurrencies\Events\NewCurrencyAdded;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -18,6 +19,7 @@ class SyncExchangeRates implements ShouldQueue
     /**
      * @param ExchangeRatesDataProviderContract $exchangeRatesDP
      * @param CurrenciesDataProviderContract $currenciesDP
+     * @throws ValidationException
      */
     public function handle(ExchangeRatesDataProviderContract $exchangeRatesDP, CurrenciesDataProviderContract $currenciesDP)
     {
@@ -36,7 +38,10 @@ class SyncExchangeRates implements ShouldQueue
         }
     }
 
-    protected function getExchangeRatesFromThirdPartyApi()
+    /**
+     * @return array
+     */
+    protected function getExchangeRatesFromThirdPartyApi() : array
     {
         return [
             'EUR' => '1.2',

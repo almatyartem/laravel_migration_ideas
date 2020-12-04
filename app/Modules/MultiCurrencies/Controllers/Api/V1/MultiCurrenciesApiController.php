@@ -6,33 +6,31 @@ use App\Exceptions\ValidationException;
 use App\Http\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Modules\MultiCurrencies\FormRequests\CurrencySignFormRequest;
-use App\Modules\MultiCurrencies\Services\MultiCurrenciesApi;
+use App\Modules\MultiCurrencies\Services\CurrenciesApi;
 use Illuminate\Http\JsonResponse;
 
 class MultiCurrenciesApiController extends Controller
 {
     /**
-     * @var MultiCurrenciesApi
+     * @param CurrenciesApi $currenciesApi
+     * @return JsonResponse
      */
-    protected MultiCurrenciesApi $service;
-
-    /**
-     * MultiCurrenciesApiController constructor.
-     * @param MultiCurrenciesApi $service
-     */
-    function __construct(MultiCurrenciesApi $service)
+    public function getAllCurrencies(CurrenciesApi $currenciesApi) : JsonResponse
     {
-        $this->service = $service;
+        $currencies = $currenciesApi->getAllCurrencies();
+
+        return ApiResponse::response($currencies);
     }
 
     /**
      * @param CurrencySignFormRequest $request
+     * @param CurrenciesApi $currenciesApi
      * @return JsonResponse
      * @throws ValidationException
      */
-    public function setCurrencySign(CurrencySignFormRequest $request) : JsonResponse
+    public function setCurrencySign(CurrencySignFormRequest $request, CurrenciesApi $currenciesApi) : JsonResponse
     {
-        $success = $this->service->setCurrencySign($request->id, $request->sign);
+        $success = $currenciesApi->setCurrencySign($request->id, $request->sign);
 
         return ApiResponse::response(null, $success);
     }

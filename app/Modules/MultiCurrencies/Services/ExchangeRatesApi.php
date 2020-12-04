@@ -2,13 +2,14 @@
 
 namespace App\Modules\MultiCurrencies\Services;
 
-use App\Contracts\MultiCurrencies\Services\CurrenciesConverterContract;
+use App\Contracts\MultiCurrencies\Services\ExchangeRatesProviderContract;
 use App\Contracts\Storage\Services\DataProviders\CurrenciesDataProviderContract;
 use App\Contracts\Storage\Services\DataProviders\ExchangeRatesDataProviderContract;
 use App\Exceptions\ValidationException;
+use App\Models\DTO\CurrencyDTO;
 use App\Models\DTO\ExchangeRateDTO;
 
-class MultiCurrenciesApi implements CurrenciesConverterContract
+class ExchangeRatesApi implements ExchangeRatesProviderContract
 {
     /**
      * @var ExchangeRatesDataProviderContract
@@ -16,19 +17,12 @@ class MultiCurrenciesApi implements CurrenciesConverterContract
     protected ExchangeRatesDataProviderContract $exchangeRatesDP;
 
     /**
-     * @var CurrenciesDataProviderContract
-     */
-    protected CurrenciesDataProviderContract $currenciesDP;
-
-    /**
-     * MultiCurrenciesApi constructor.
+     * ExchangeRatesApi constructor.
      * @param ExchangeRatesDataProviderContract $exchangeRatesDP
-     * @param CurrenciesDataProviderContract $currenciesDP
      */
-    function __construct(ExchangeRatesDataProviderContract $exchangeRatesDP, CurrenciesDataProviderContract $currenciesDP)
+    function __construct(ExchangeRatesDataProviderContract $exchangeRatesDP)
     {
         $this->exchangeRatesDP = $exchangeRatesDP;
-        $this->currenciesDP = $currenciesDP;
     }
 
     /**
@@ -44,16 +38,5 @@ class MultiCurrenciesApi implements CurrenciesConverterContract
             ->find();
 
         return $rates;
-    }
-
-    /**
-     * @param int $currencyId
-     * @param string $sign
-     * @return bool
-     * @throws ValidationException
-     */
-    public function setCurrencySign(int $currencyId, string $sign) : bool
-    {
-        return $this->currenciesDP->setSign($currencyId, $sign);
     }
 }

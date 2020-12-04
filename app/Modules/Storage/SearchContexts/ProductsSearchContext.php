@@ -34,4 +34,13 @@ class ProductsSearchContext extends BaseSearchContext implements ProductsSearchC
     {
         return parent::find();
     }
+
+    /**
+     * @param string $code
+     * @return ProductsSearchContext
+     */
+    public function byCode(string $code) : ProductsSearchContext
+    {
+        return $this->whereEqual('code', $code);
+    }
 }

@@ -6,17 +6,17 @@ use App\Contracts\Storage\Services\DataProviders\ProductsDataProviderContract;
 use App\Http\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\DTO\ExchangeRateDTO;
-use App\Modules\MultiCurrencies\Services\MultiCurrenciesApi;
+use App\Modules\MultiCurrencies\Services\CurrenciesApi;
 use Illuminate\Http\JsonResponse;
 
 class WebStoreApiController extends Controller
 {
     /**
      * @param ProductsDataProviderContract $productsDataProvider
-     * @param MultiCurrenciesApi $multiCurrenciesApi
+     * @param CurrenciesApi $multiCurrenciesApi
      * @return JsonResponse
      */
-    public function getProducts(ProductsDataProviderContract $productsDataProvider, MultiCurrenciesApi $multiCurrenciesApi) : JsonResponse
+    public function getProducts(ProductsDataProviderContract $productsDataProvider, CurrenciesApi $multiCurrenciesApi) : JsonResponse
     {
         $result = [];
         $products = $productsDataProvider->search()->find();
