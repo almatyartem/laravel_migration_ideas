@@ -30,7 +30,7 @@ The application should perform in the background these actions:
 - Module's Main Service Provider could include the other Module's Service Providers
 - Database Driver (Eloquent by default) should be replaceable
 
-###Define Modules
+##Define Modules
 - [DbDataProviders](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Modules/DbDataProviders)
 > Encapsulates all work with the database. Implemented one provider (Eloquent) which could be replaced by another one
 - [Repositories](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Modules/Repositories)
@@ -44,18 +44,18 @@ The application should perform in the background these actions:
 - [AdminNotificator](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Modules/AdminNotificator)
 > One place to send different notifications to store administrator 
 
-###Common App resources
-####Database migrations
+##Common App resources
+##Database migrations
 - [products table creating migration](https://github.com/almatyartem/laravel_migration_ideas/blob/master/database/migrations/2020_11_27_084858_create_products_table.php)
 - [currencies table creating migration](https://github.com/almatyartem/laravel_migration_ideas/blob/master/database/migrations/2020_11_27_083250_create_currencies_table.php)
 - [exchange_rates table creating migration](https://github.com/almatyartem/laravel_migration_ideas/blob/master/database/migrations/2020_11_27_083611_create_exchange_rates_table.php)
 
-####DTO Classes
+##DTO Classes
 - [CurrencyDTO](https://github.com/almatyartem/laravel_migration_ideas/blob/master/app/Models/DTO/CurrencyDTO.php)
 - [ExchangeRateDTO](https://github.com/almatyartem/laravel_migration_ideas/blob/master/app/Models/DTO/ExchangeRateDTO.php)
 - [ProductDTO](https://github.com/almatyartem/laravel_migration_ideas/blob/master/app/Models/DTO/ProductDTO.php)
 
-####Contracts
+##Contracts
 - [DbDataProviders](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Contracts/DbDataProviders)
 - [Repositories](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Contracts/Repositories/Services)
 - [Search](https://github.com/almatyartem/laravel_migration_ideas/tree/master/app/Contracts/Search/Services)
