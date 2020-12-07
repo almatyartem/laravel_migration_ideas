@@ -2,9 +2,9 @@
 
 namespace App\Modules\DbDataProviders;
 
-use App\Contracts\DbDataProviders\Eloquent\CurrenciesEDBContract;
-use App\Contracts\DbDataProviders\Eloquent\ExchangeRatesEDBContract;
-use App\Contracts\DbDataProviders\Eloquent\ProductsEDBContract;
+use App\Contracts\DbDataProviders\Entities\CurrenciesDBContract;
+use App\Contracts\DbDataProviders\Entities\ExchangeRatesDBContract;
+use App\Contracts\DbDataProviders\Entities\ProductsDBContract;
 
 use App\Modules\DbDataProviders\Eloquent\Services\CurrenciesDbDataProvider;
 use App\Modules\DbDataProviders\Eloquent\Services\ExchangeRatesDbDataProvider;
@@ -20,8 +20,8 @@ class DbDataProvidersServiceProvider extends ServiceProvider
      * @var array
      */
     public $bindings = [
-        CurrenciesEDBContract::class  => CurrenciesDbDataProvider::class,
-        ExchangeRatesEDBContract::class  => ExchangeRatesDbDataProvider::class,
-        ProductsEDBContract::class  => ProductsDbDataProvider::class,
+        CurrenciesDBContract::class  => CurrenciesDbDataProvider::class,
+        ExchangeRatesDBContract::class  => ExchangeRatesDbDataProvider::class,
+        ProductsDBContract::class  => ProductsDbDataProvider::class,
     ];
 }

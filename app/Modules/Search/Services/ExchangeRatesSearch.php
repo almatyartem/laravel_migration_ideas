@@ -2,7 +2,7 @@
 
 namespace App\Modules\Search\Services;
 
-use App\Contracts\DbDataProviders\Eloquent\ExchangeRatesEDBContract;
+use App\Contracts\DbDataProviders\Entities\ExchangeRatesDBContract;
 use App\Contracts\Search\Services\ExchangeRatesSearchContract;
 use App\Models\DTO\Extendable\DTOModel;
 use App\Models\DTO\ExchangeRateDTO;
@@ -12,9 +12,9 @@ class ExchangeRatesSearch extends BaseSearch implements ExchangeRatesSearchContr
 {
     /**
      * ExchangeRatesSearchContext constructor.
-     * @param ExchangeRatesEDBContract $dbDataProvider
+     * @param ExchangeRatesDBContract $dbDataProvider
      */
-    function __construct(ExchangeRatesEDBContract $dbDataProvider)
+    function __construct(ExchangeRatesDBContract $dbDataProvider)
     {
         parent::__construct($dbDataProvider);
     }

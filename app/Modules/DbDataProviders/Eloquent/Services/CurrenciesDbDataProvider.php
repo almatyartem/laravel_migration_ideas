@@ -2,12 +2,12 @@
 
 namespace App\Modules\DbDataProviders\Eloquent\Services;
 
-use App\Contracts\DbDataProviders\Eloquent\CurrenciesEDBContract;
+use App\Contracts\DbDataProviders\Entities\CurrenciesDBContract;
 use App\Modules\DbDataProviders\Eloquent\Services\Extendable\EloquentDbDataProvider;
 use App\Modules\DbDataProviders\Eloquent\Models\Currency;
 use App\Modules\DbDataProviders\Eloquent\ModelToDTOConverter;
 
-class CurrenciesDbDataProvider extends EloquentDbDataProvider implements CurrenciesEDBContract
+class CurrenciesDbDataProvider extends EloquentDbDataProvider implements CurrenciesDBContract
 {
     /**
      * @var Currency

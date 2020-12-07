@@ -2,26 +2,26 @@
 
 namespace App\Modules\Repositories\Services;
 
+use App\Contracts\DbDataProviders\Entities\CurrenciesDBContract;
 use App\Contracts\Repositories\Services\CurrenciesRepositoryContract;
 use App\Exceptions\NotFoundException;
 use App\Exceptions\ValidationException;
 use App\Models\DTO\Extendable\DTOModel;
 use App\Modules\Repositories\Services\Extendable\BaseRepository;
-use App\Modules\DbDataProviders\Eloquent\Services\CurrenciesDbDataProvider;
 use App\Models\DTO\CurrencyDTO;
 
 class CurrenciesRepository extends BaseRepository implements CurrenciesRepositoryContract
 {
     /**
-     * @var CurrenciesDbDataProvider
+     * @var CurrenciesDBContract
      */
     protected $dbProvider;
 
     /**
      * CurrenciesRepository constructor.
-     * @param CurrenciesDbDataProvider $dbProvider
+     * @param CurrenciesDBContract $dbProvider
      */
-    function __construct(CurrenciesDbDataProvider $dbProvider)
+    function __construct(CurrenciesDBContract $dbProvider)
     {
         parent::__construct($dbProvider);
     }

@@ -2,12 +2,12 @@
 
 namespace App\Modules\DbDataProviders\Eloquent\Services;
 
-use App\Contracts\DbDataProviders\Eloquent\ProductsEDBContract;
+use App\Contracts\DbDataProviders\Entities\ProductsDBContract;
 use App\Modules\DbDataProviders\Eloquent\Services\Extendable\EloquentDbDataProvider;
 use App\Modules\DbDataProviders\Eloquent\Models\Product;
 use App\Modules\DbDataProviders\Eloquent\ModelToDTOConverter;
 
-class ProductsDbDataProvider extends EloquentDbDataProvider implements ProductsEDBContract
+class ProductsDbDataProvider extends EloquentDbDataProvider implements ProductsDBContract
 {
     /**
      * @var Product
