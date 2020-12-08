@@ -2,7 +2,7 @@
 
 namespace App\Modules\Search\Services;
 
-use App\Contracts\DbDataProviders\Entities\CurrenciesDBContract;
+use App\Contracts\DbDataProviders\DbDataProviderContract;
 use App\Contracts\Search\Services\CurrenciesSearchContract;
 use App\Models\DTO\CurrencyDTO;
 use App\Modules\Search\Services\Extendable\BaseSearch;
@@ -11,9 +11,9 @@ class CurrenciesSearch extends BaseSearch implements CurrenciesSearchContract
 {
     /**
      * CurrenciesSearchContext constructor.
-     * @param CurrenciesDBContract $dbDataProvider
+     * @param DbDataProviderContract $dbDataProvider
      */
-    function __construct(CurrenciesDBContract $dbDataProvider)
+    function __construct(DbDataProviderContract $dbDataProvider)
     {
         parent::__construct($dbDataProvider);
     }

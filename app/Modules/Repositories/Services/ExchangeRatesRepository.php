@@ -2,7 +2,7 @@
 
 namespace App\Modules\Repositories\Services;
 
-use App\Contracts\DbDataProviders\Entities\ExchangeRatesDBContract;
+use App\Contracts\DbDataProviders\DbDataProviderContract;
 use App\Contracts\Repositories\Services\ExchangeRatesRepositoryContract;
 use App\Exceptions\ValidationException;
 use App\Models\DTO\Extendable\DTOModel;
@@ -12,15 +12,15 @@ use App\Models\DTO\ExchangeRateDTO;
 class ExchangeRatesRepository extends BaseRepository implements ExchangeRatesRepositoryContract
 {
     /**
-     * @var ExchangeRatesDBContract
+     * @var DbDataProviderContract
      */
     protected $dbProvider;
 
     /**
      * ExchangeRatesRepository constructor.
-     * @param ExchangeRatesDBContract $dbProvider
+     * @param DbDataProviderContract $dbProvider
      */
-    function __construct(ExchangeRatesDBContract $dbProvider)
+    function __construct(DbDataProviderContract $dbProvider)
     {
         parent::__construct($dbProvider);
     }

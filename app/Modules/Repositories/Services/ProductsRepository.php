@@ -2,6 +2,7 @@
 
 namespace App\Modules\Repositories\Services;
 
+use App\Contracts\DbDataProviders\DbDataProviderContract;
 use App\Contracts\DbDataProviders\Entities\ProductsDBContract;
 use App\Contracts\Repositories\Services\ProductsRepositoryContract;
 use App\Exceptions\NotFoundException;
@@ -13,15 +14,15 @@ use App\Models\DTO\ProductDTO;
 class ProductsRepository extends BaseRepository implements ProductsRepositoryContract
 {
     /**
-     * @var ProductsDBContract
+     * @var DbDataProviderContract
      */
     protected $dbProvider;
 
     /**
      * ProductsRepository constructor.
-     * @param ProductsDBContract $dbProvider
+     * @param DbDataProviderContract $dbProvider
      */
-    function __construct(ProductsDBContract $dbProvider)
+    function __construct(DbDataProviderContract $dbProvider)
     {
         parent::__construct($dbProvider);
     }

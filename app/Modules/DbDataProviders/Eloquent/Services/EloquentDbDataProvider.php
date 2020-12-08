@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\DbDataProviders\Eloquent\Services\Extendable;
+namespace App\Modules\DbDataProviders\Eloquent\Services;
 
 use App\Contracts\DbDataProviders\QueryBuilderContract;
 use App\Contracts\Search\Services\BaseSearchContract;
@@ -12,7 +12,7 @@ use App\Modules\DbDataProviders\Eloquent\Models\Extendable\BaseEloquentModel;
 use App\Modules\DbDataProviders\Eloquent\ModelToDTOConverter;
 use Illuminate\Database\Eloquent\Builder;
 
-abstract class EloquentDbDataProvider implements DbDataProviderContract
+class EloquentDbDataProvider implements DbDataProviderContract
 {
     /**
      * @var BaseEloquentModel
